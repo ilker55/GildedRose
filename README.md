@@ -1,4 +1,12 @@
-# Gilded Rose Refactoring Kata
+# Gilded Rose kata als gesprekskapstok
+Hallo en leuk dat je bereid bent om via deze oefening inzicht te geven in je development proces. De KATA instructies zijn 1 op 1 over genomen van de initiele ontwikkelaars; ze geven zichzelf onderin credit.  
+
+Dan:  
+Dit project bevat een erg simpele solution waar een aantal zaken nogal on-SOLID zijn aangepakt.  
+Probeer niet als 1 grote commit je werk door te voeren, maar kleinere incrementele veranderingen aan te brengen. Het resultaat kan je, maar het hoeft niet, als een PR sturen. 
+
+
+# Case: Gilded Rose Refactoring Kata
 
 Hi and welcome to team Gilded Rose. As you know, we are a small inn with a 
 prime location in a prominent city ran by a friendly innkeeper named 
