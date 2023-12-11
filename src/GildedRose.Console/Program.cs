@@ -5,13 +5,15 @@ namespace GildedRose.Console
     class Program
     {
         IList<Item> Items;
+        private int currentDay = 1;
+
         static void Main(string[] args)
         {
-            System.Console.WriteLine("OMGHAI!");
+            //System.Console.WriteLine("OMGHAI!");
 
             var app = new Program()
-                          {
-                              Items = new List<Item>
+            {
+                Items = new List<Item>
                                           {
                                               new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
                                               new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
@@ -26,12 +28,26 @@ namespace GildedRose.Console
                                               new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
                                           }
 
-                          };
+            };
 
-            app.UpdateQuality();
+            //app.UpdateQuality();
 
-            System.Console.ReadKey();
+            //System.Console.ReadKey();
 
+            app.StartDayProgression();
+        }
+
+        public void StartDayProgression()
+        {
+            // Set a maximum of 10 days for testing purposes.
+            while (currentDay <= 10)
+            {
+                System.Console.WriteLine($"Day {currentDay}");
+                ShowAllItems();
+
+                System.Console.ReadKey();
+                currentDay++;
+            }
         }
 
         public void UpdateQuality()
@@ -109,7 +125,14 @@ namespace GildedRose.Console
                 }
             }
         }
-
+        public void ShowAllItems()
+        {
+            System.Console.WriteLine("Items:");
+            foreach (var item in Items)
+            {
+                System.Console.WriteLine($" - {item.Name} (SellIn: {item.SellIn}, Quality: {item.Quality})");
+            }
+        }
     }
 
     public class Item
