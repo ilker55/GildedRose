@@ -2,7 +2,7 @@
 
 namespace GildedRose.Console
 {
-    class Program
+    public class Program
     {
         IList<Item> Items;
         private int currentDay = 1;
@@ -42,10 +42,15 @@ namespace GildedRose.Console
             // Set a maximum of 10 days for testing purposes.
             while (currentDay <= 10)
             {
+                // Display current day and items
                 System.Console.WriteLine($"Day {currentDay}");
                 ShowAllItems();
 
+                // Wait for next day
                 System.Console.ReadKey();
+
+                // Progress to next day
+                UpdateQuality();
                 currentDay++;
             }
         }
@@ -125,6 +130,7 @@ namespace GildedRose.Console
                 }
             }
         }
+
         public void ShowAllItems()
         {
             System.Console.WriteLine("Items:");
@@ -133,6 +139,10 @@ namespace GildedRose.Console
                 System.Console.WriteLine($" - {item.Name} (SellIn: {item.SellIn}, Quality: {item.Quality})");
             }
         }
+
+        public void SetItems(IList<Item> items) => Items = items;
+
+        public Item GetItemByIndex(int index) => index < Items.Count ? Items[index] : null;
     }
 
     public class Item
