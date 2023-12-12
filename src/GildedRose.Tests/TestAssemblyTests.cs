@@ -154,7 +154,7 @@ namespace GildedRose.Tests
             var app = new Program();
             app.SetItems(new List<Item>
             {
-                new Item {Name = "Conjured", SellIn = 10, Quality = 20}
+                new Item {Name = "Conjured Mana Cake", SellIn = 10, Quality = 20}
             });
 
             // Quality degrades by 2
