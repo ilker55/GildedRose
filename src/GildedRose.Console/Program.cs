@@ -57,76 +57,54 @@ namespace GildedRose.Console
 
         public void UpdateQuality()
         {
-            for (var i = 0; i < Items.Count; i++)
+            foreach (var item in Items)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (Items[i].Quality > 0)
-                    {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            Items[i].Quality = Items[i].Quality - ItemQualityDegradation(Items[i]);
-                        }
-                    }
-                }
-                else
-                {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
+                if (item.Name == "Sulfuras, Hand of Ragnaros")
+                    continue;
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
+                switch (item.Name)
+                {
+                    case "Aged Brie":
+                    case "Backstage passes to a TAFKAL80ETC concert":
+                        if (item.Quality >= 50)
+                            break;
 
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
+                        item.Quality++;
+
+                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.Quality < 50)
+                        {
+                            if (item.SellIn < 11)
+                                item.Quality++;
+
+                            if (item.SellIn < 6)
+                                item.Quality++;
                         }
-                    }
+                        break;
+                    default:
+                        if (item.Quality > 0)
+                            item.Quality -= ItemQualityDegradation(item);
+                        break;
                 }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    Items[i].SellIn = Items[i].SellIn - 1;
-                }
+                item.SellIn--;
 
-                if (Items[i].SellIn < 0)
+                if (item.SellIn >= 0)
+                    continue;
+
+                switch (item.Name)
                 {
-                    if (Items[i].Name != "Aged Brie")
-                    {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                    case "Aged Brie":
+                        if (item.Quality < 50)
                         {
-                            if (Items[i].Quality > 0)
-                            {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    Items[i].Quality = Items[i].Quality - ItemQualityDegradation(Items[i]);
-                                }
-                            }
+                            item.Quality++;
                         }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                        }
-                    }
-                    else
-                    {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
-                    }
+                        break;
+                    case "Backstage passes to a TAFKAL80ETC concert":
+                        item.Quality -= item.Quality;
+                        break;
+                    default:
+                        item.Quality -= ItemQualityDegradation(item);
+                        break;
                 }
             }
         }
