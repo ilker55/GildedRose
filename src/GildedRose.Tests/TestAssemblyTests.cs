@@ -144,5 +144,26 @@ namespace GildedRose.Tests
                 Assert.Equal(31 + i * 3, app.GetItemByIndex(0)?.Quality);
             }
         }
+
+        /// <summary>
+        /// Requirement: "Conjured" items degrade in Quality twice as fast as normal items
+        /// </summary>
+        [Fact]
+        public void TestConjuredQualityDegradation()
+        {
+            var app = new Program();
+            app.SetItems(new List<Item>
+            {
+                new Item {Name = "Conjured", SellIn = 10, Quality = 20}
+            });
+
+            // Quality degrades by 2
+            app.UpdateQuality();
+            Assert.Equal(18, app.GetItemByIndex(0)?.Quality);
+
+            // Quality degrades by 2
+            app.UpdateQuality();
+            Assert.Equal(16, app.GetItemByIndex(0)?.Quality);
+        }
     }
 }
