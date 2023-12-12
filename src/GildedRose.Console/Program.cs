@@ -4,6 +4,11 @@ namespace GildedRose.Console
 {
     public class Program
     {
+        private const string ItemAgedBrie = "Aged Brie";
+        private const string ItemSulfuras = "Sulfuras, Hand of Ragnaros";
+        private const string ItemBackstage = "Backstage passes to a TAFKAL80ETC concert";
+        private const string ItemConjured = "Conjured Mana Cake";
+
         IList<Item> Items;
         private int currentDay = 1;
 
@@ -59,19 +64,19 @@ namespace GildedRose.Console
         {
             foreach (var item in Items)
             {
-                if (item.Name == "Sulfuras, Hand of Ragnaros")
+                if (item.Name == ItemSulfuras)
                     continue;
 
                 switch (item.Name)
                 {
-                    case "Aged Brie":
-                    case "Backstage passes to a TAFKAL80ETC concert":
+                    case ItemAgedBrie:
+                    case ItemBackstage:
                         if (item.Quality >= 50)
                             break;
 
                         item.Quality++;
 
-                        if (item.Name == "Backstage passes to a TAFKAL80ETC concert" && item.Quality < 50)
+                        if (item.Quality < 50)
                         {
                             if (item.SellIn < 11)
                                 item.Quality++;
@@ -93,13 +98,13 @@ namespace GildedRose.Console
 
                 switch (item.Name)
                 {
-                    case "Aged Brie":
+                    case ItemAgedBrie:
                         if (item.Quality < 50)
                         {
                             item.Quality++;
                         }
                         break;
-                    case "Backstage passes to a TAFKAL80ETC concert":
+                    case ItemBackstage:
                         item.Quality -= item.Quality;
                         break;
                     default:
@@ -118,7 +123,7 @@ namespace GildedRose.Console
             }
         }
 
-        public int ItemQualityDegradation(Item item) => item.Name == "Conjured Mana Cake" ? 2 : 1;
+        public int ItemQualityDegradation(Item item) => item.Name == ItemConjured ? 2 : 1;
 
         public void SetItems(IList<Item> items) => Items = items;
 
