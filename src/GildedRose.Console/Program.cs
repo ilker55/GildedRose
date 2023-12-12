@@ -65,7 +65,7 @@ namespace GildedRose.Console
                     {
                         if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                         {
-                            Items[i].Quality = Items[i].Quality - 1;
+                            Items[i].Quality = Items[i].Quality - ItemQualityDegradation(Items[i]);
                         }
                     }
                 }
@@ -111,7 +111,7 @@ namespace GildedRose.Console
                             {
                                 if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
                                 {
-                                    Items[i].Quality = Items[i].Quality - 1;
+                                    Items[i].Quality = Items[i].Quality - ItemQualityDegradation(Items[i]);
                                 }
                             }
                         }
@@ -139,6 +139,8 @@ namespace GildedRose.Console
                 System.Console.WriteLine($" - {item.Name} (SellIn: {item.SellIn}, Quality: {item.Quality})");
             }
         }
+
+        public int ItemQualityDegradation(Item item) => item.Name == "Conjured Mana Cake" ? 2 : 1;
 
         public void SetItems(IList<Item> items) => Items = items;
 
